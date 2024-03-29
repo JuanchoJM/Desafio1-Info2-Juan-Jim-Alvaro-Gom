@@ -52,17 +52,17 @@ b) Esquema donde se describen las tareas definidas en el desarrollo de los algor
 Punto 3: Configurar cerradura
 
 +-----------------------------------+
-|        configureCerradura()        |
+|        configureCerradura()       |
 +-----------------------------------+
                  |
                  V
-+-----------------------------------+
++------------------------------------+
 | Solicitar cantidad de estructuras M|
-+-----------------------------------+
++------------------------------------+
                  |
                  V
 +-----------------------------------+
-|       Crear Cerradura vacía        |
+|       Crear Cerradura vacía       |
 +-----------------------------------+
                  |
                  V
@@ -73,23 +73,24 @@ Punto 3: Configurar cerradura
                  |
                  V
 +-----------------------------------+
-| Solicitar tamaño de estructura M   |
+| Solicitar tamaño de estructura M  |
 +-----------------------------------+
                  |
                  V
-+--------------------------------------+
-| Crear EstructuraM con       |
++------------ -------------+
+| Crear EstructuraM con    |
 |crearEstructuraM(tamano)  |
-+--------------------------------------+
++--------------------------+
                  |
                  V
-+-----------------------------------+
++--------------------------+
 | Agregar EstructuraM a    |
-| la Cerradura                      | 
-+-----------------------------------+
+| la Cerradura             | 
++--------------------------+
                  |
                  V
-+-----------------------------------+
++---------------------- ------+
 |      Devolver Cerradura     |
-+-----------------------------------+
-…..
++-----------------------------+
+
+
