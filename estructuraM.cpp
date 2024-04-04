@@ -1,15 +1,8 @@
+#include "estructuraM.h"
 #include <iostream>
 
 using namespace std;
 
-// Definición de la estructura de datos M
-struct EstructuraM {
-    int **datos;  // Puntero a puntero para representar la matriz de enteros
-    int filas;
-    int columnas;
-};
-
-// Función para crear una estructura de datos M con tamaño variable y espacio en blanco en el centro
 EstructuraM crearEstructuraM(int tamano) {
     // Verificar que el tamaño sea impar
     if (tamano % 2 == 0) {
@@ -47,7 +40,6 @@ EstructuraM crearEstructuraM(int tamano) {
     return estructura;
 }
 
-// Función para liberar la memoria asignada a una estructura M
 void liberarEstructuraM(EstructuraM &estructura) {
     for (int i = 0; i < estructura.filas; i++) {
         delete[] estructura.datos[i];
@@ -57,26 +49,52 @@ void liberarEstructuraM(EstructuraM &estructura) {
     estructura.columnas = 0;
 }
 
-int main() {
-    // Ejemplo de uso del módulo para crear una estructura M de tamaño 3x3 con espacio en blanco en el centro
-    int tamano = 4;
-    EstructuraM M = crearEstructuraM(tamano);
+void rotarAntihorario(EstructuraM &estructura, int rotaciones) {
+    int tamano = estructura.filas;
+    int **nuevaMatriz = new int*[tamano];
+    for (int i = 0; i < tamano; i++) {
+        nuevaMatriz[i] = new int[tamano];
+    }
 
-    // Impresión de la estructura creada (solo como ejemplo)
-    cout << "Estructura M creada de tamaño " << M.filas << "x" << M.columnas << " con espacio en blanco en el centro:" << endl;
-    for (int i = 0; i < M.filas; i++) {
-        for (int j = 0; j < M.columnas; j++) {
-            if (M.datos[i][j] == -1) {
+    for (int r = 0; r < rotaciones; r++) {
+        for (int i = 0; i < tamano; i++) {
+            for (int j = 0; j < tamano; j++) {
+                nuevaMatriz[tamano - 1 - j][i] = estructura.datos[i][j];
+            }
+        }
+
+        for (int i = 0; i < tamano; i++) {
+            delete[] estructura.datos[i];
+        }
+        delete[] estructura.datos;
+
+        estructura.datos = nuevaMatriz;
+
+        // Asignar nueva memoria para la matriz rotada
+        nuevaMatriz = new int*[tamano];
+        for (int i = 0; i < tamano; i++) {
+            nuevaMatriz[i] = new int[tamano];
+        }
+    }
+
+    // Liberar memoria de la última matriz asignada
+    for (int i = 0; i < tamano; i++) {
+        delete[] nuevaMatriz[i];
+    }
+    delete[] nuevaMatriz;
+}
+
+void imprimirEstructuraM(EstructuraM &estructura) {
+    for (int i = 0; i < estructura.filas; i++) {
+        for (int j = 0; j < estructura.columnas; j++) {
+            if (estructura.datos[i][j] == -1) {
                 cout << "  ";  // Imprimir espacio en blanco
             } else {
-                cout << M.datos[i][j] << " ";
+                cout << estructura.datos[i][j] << " ";
             }
         }
         cout << endl;
     }
-
-    // Liberar memoria asignada a la estructura M
-    liberarEstructuraM(M);
-
-    return 0;
 }
+
+
